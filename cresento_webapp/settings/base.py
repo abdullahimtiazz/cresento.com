@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
+    'crispy_bootstrap4',
     'django_countries',
 
     'core'
@@ -32,9 +33,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
-ROOT_URLCONF = 'djecommerce.urls'
+ROOT_URLCONF = 'cresento_webapp.urls'
 
 TEMPLATES = [
     {
@@ -52,7 +54,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'djecommerce.wsgi.application'
+WSGI_APPLICATION = 'cresento_webapp.wsgi.application'
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'

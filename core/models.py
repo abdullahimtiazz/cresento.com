@@ -7,9 +7,7 @@ from django_countries.fields import CountryField
 
 
 CATEGORY_CHOICES = (
-    ('S', 'Shirt'),
-    ('SW', 'Sport wear'),
-    ('OW', 'Outwear')
+    ('S', 'Shin pads'),
 )
 
 LABEL_CHOICES = (
@@ -23,6 +21,15 @@ ADDRESS_CHOICES = (
     ('S', 'Shipping'),
 )
 
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message from {self.name} ({self.email})"
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
@@ -38,7 +45,7 @@ class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    category = models.CharField(choices=CATEGORY_CHOICES, max_length=1)
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
     description = models.TextField()
@@ -182,5 +189,16 @@ def userprofile_receiver(sender, instance, created, *args, **kwargs):
     if created:
         userprofile = UserProfile.objects.create(user=instance)
 
+class CarouselImage(models.Model):
+    title = models.CharField(max_length=100, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='carousel_images/')
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title if self.title else 'Carousel Image'
 
 post_save.connect(userprofile_receiver, sender=settings.AUTH_USER_MODEL)

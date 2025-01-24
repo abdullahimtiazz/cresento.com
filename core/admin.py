@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Item, OrderItem, Order, Payment, Coupon, Refund, Address, UserProfile
+from .models import Item, OrderItem, Order, Payment, Coupon, Refund, Address, UserProfile, ContactMessage, CarouselImage
 
 
 def make_refund_accepted(modeladmin, request, queryset):
@@ -9,6 +9,9 @@ def make_refund_accepted(modeladmin, request, queryset):
 
 make_refund_accepted.short_description = 'Update orders to refund granted'
 
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'created_at')
+    search_fields = ('name', 'email')
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['user',
@@ -54,6 +57,10 @@ class AddressAdmin(admin.ModelAdmin):
     list_filter = ['default', 'address_type', 'country']
     search_fields = ['user', 'street_address', 'apartment_address', 'zip']
 
+@admin.register(CarouselImage)
+class CarouselImageAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order')
+    list_editable = ('order',)
 
 admin.site.register(Item)
 admin.site.register(OrderItem)
@@ -63,3 +70,4 @@ admin.site.register(Coupon)
 admin.site.register(Refund)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(UserProfile)
+admin.site.register(ContactMessage, ContactMessageAdmin)

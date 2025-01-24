@@ -1,7 +1,7 @@
 from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-
+from .models import ContactMessage
 
 PAYMENT_CHOICES = (
     ('S', 'Stripe'),
@@ -59,3 +59,18 @@ class PaymentForm(forms.Form):
     stripeToken = forms.CharField(required=False)
     save = forms.BooleanField(required=False)
     use_default = forms.BooleanField(required=False)
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactMessage
+        fields = ['name', 'email', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'w-full p-2 rounded-lg border border-gray-300'}),
+            'email': forms.EmailInput(attrs={'class': 'w-full p-2 rounded-lg border border-gray-300'}),
+            'message': forms.Textarea(attrs={'class': 'w-full p-2 rounded-lg border border-gray-300', 'rows': 6}),
+        }
+
+    # fullname = forms.CharField(required=True)
+    # email = forms.EmailField(required=True)
+    # message = forms.CharField(required=True)

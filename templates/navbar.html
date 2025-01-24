@@ -5,7 +5,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand waves-effect" href="/">
-        <strong class="blue-text">DJe-commerce</strong>
+        <strong class="black-text">Cresento.</strong>
       </a>
 
       <!-- Collapse -->
@@ -19,19 +19,39 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
-          {% comment %} <li class="nav-item active">
-            <a class="nav-link waves-effect" href="/">Home
-              <span class="sr-only">(current)</span>
+           <li class="nav-item ">
+            <a class="nav-link waves-effect" href="/">
+              Home
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="/checkout">
-            Checkout</a>
-          </li> {% endcomment %}
+            <a class="nav-link waves-effect" href="/all-products">
+            Products
+          </a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/why-us">
+            Why Us?
+          </a>
+          </li> <li class="nav-item">
+            <a class="nav-link waves-effect" href="/check-your-stats">
+            Check your Stats
+          </a>
+          </li> <li class="nav-item">
+            <a class="nav-link waves-effect" href="/about-us">
+              About Cresento
+          </a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/contact">
+            Contact Us
+          </a>
+          </li> 
         </ul>
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
+          
           {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
@@ -39,13 +59,28 @@
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
             </a>
-          </li>
+          </li> 
           <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
               <span class="clearfix d-none d-sm-inline-block"> Logout </span>
             </a>
           </li>
           {% else %}
+          <li class="nav-item">
+            <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
+              <span class="badge red z-depth-1 mr-1">
+                {% with request.session.cart as cart %}
+                  {% if cart %}
+                    {{ cart|length }}
+                  {% else %}
+                    0
+                  {% endif %}
+                {% endwith %}
+              </span>
+              <i class="fas fa-shopping-cart"></i>
+              <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+            </a>
+          </li> 
           <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'account_login' %}">
               <span class="clearfix d-none d-sm-inline-block"> Login </span>

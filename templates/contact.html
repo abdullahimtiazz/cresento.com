@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  <main >
+    <div class="container wow fadeIn">
+      <h2 class="my-5 h2 text-center">Contact the Cresento team.</h2>
+      <div class="row">
+        <div class="col-md-8 mb-4">
+          <div class="card">
+            <form method="POST" class="card-body">
+              {% csrf_token %}
+              <h3>Send us a message!</h3>
+              <div class='hideable_contact_form'>
+                <div class="md-form mb-5">
+                  <input type='text' placeholder='CHAN, Tai Man' id='fullname' name='name' class='form-control' />
+                  <label for= "name" class= "">Full name:</label>
+                </div>
+
+                <div class="md-form mb-5">
+                  <input type='text' placeholder='chantaiman@gmail.com' id='email' name='email' class='form-control' />
+                  <label for="email" class="">Email:</label>
+                </div>
+
+                <div class="md-form mb-5">
+                    <input type='text' placeholder="We'd love to hear from you!" id='message' name='message' class='form-control' />
+                    <label for="message" class="">Your message here:</label>
+                  </div>
+              </div>
+              <hr class="mb-4">
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock content %}
+
+{% block extra_scripts%}
+
+{% endblock %}
