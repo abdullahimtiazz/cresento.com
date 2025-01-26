@@ -25,8 +25,6 @@ Frontend Tasks:
 
 Backend Tasks:
 1- Login
-    when a new person creates an account at checkout
-    their order should be saved and redirected to checkout page again.
 2- Allow for credit card payments at checkout. 
-    to think about
+    
 3- Integrate with Firebase (optional).
