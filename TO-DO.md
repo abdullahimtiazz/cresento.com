@@ -24,6 +24,9 @@ Frontend Tasks:
 4- Fill in the static pages.
 
 Backend Tasks:
-1- Make sure users only need to create an account at checkout.
+1- Login
+    when a new person creates an account at checkout
+    their order should be saved and redirected to checkout page again.
 2- Allow for credit card payments at checkout. 
+    to think about
 3- Integrate with Firebase (optional).
