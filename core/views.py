@@ -43,6 +43,23 @@ def is_valid_form(values):
     return valid
 
 
+def transfer_session_cart_to_user(request, user):
+    cart = request.session.get('cart', {})
+    if cart:
+        order, created = Order.objects.get_or_create(user=user, ordered=False, ordered_date=timezone.now()) 
+        for slug, item_data in cart.items():
+            item = get_object_or_404(Item, slug=slug)
+            order_item, created = OrderItem.objects.get_or_create(
+                item=item,
+                user=user,
+                ordered=False
+            )
+            order_item.quantity = item_data['quantity']
+            order_item.save()
+            order.items.add(order_item)
+        request.session['cart'] = {}
+
+
 class CheckoutView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
@@ -355,7 +372,7 @@ def HomeView(request):
     carousel_images = CarouselImage.objects.all()
     return render(request, 'home.html', {'carousel_images': carousel_images})
 
-#add this parameter for login: LoginRequiredMixin, 
+
 class OrderSummaryView(View):
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
