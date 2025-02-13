@@ -44,26 +44,39 @@ def is_valid_form(values):
 
 
 def transfer_session_cart_to_user(request, user):
+
+# if the user has an empty cart
+#     transfer the items Over
+# otherwise
+#     let the existing cart override it and warn the user
+
     cart = request.session.get('cart', {})
-    if cart:
-        order, created = Order.objects.get_or_create(user=user, ordered=False, ordered_date=timezone.now()) 
-        for slug, item_data in cart.items():
-            item = get_object_or_404(Item, slug=slug)
-            order_item, created = OrderItem.objects.get_or_create(
-                item=item,
-                user=user,
-                ordered=False
-            )
-            order_item.quantity = item_data['quantity']
-            order_item.save()
-            order.items.add(order_item)
+    order = Order.objects.filter(user=user, ordered=False).first()
+    if order:
         request.session['cart'] = {}
+        messages.warning(request, "You already have an active order. Your cart has been restored.")
+    else:
+        if cart:
+            order, created = Order.objects.get_or_create(user=user, ordered=False, ordered_date= timezone.now()) 
+            for slug, item_data in cart.items():
+                item = get_object_or_404(Item, slug=slug)
+                order_item, created = OrderItem.objects.get_or_create(
+                    item=item,
+                    user=user,
+                    ordered=False
+                )
+                order_item.quantity = item_data['quantity']
+                order_item.save()
+                order.items.add(order_item)
+            request.session['cart'] = {}
+            messages.success(request, "Your cart has been transferred to your account.")
 
 
 class CheckoutView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
-            order = Order.objects.get(user=self.request.user, ordered=False)
+            orders = Order.objects.filter(user=self.request.user, ordered=False)
+            order = orders.first()
             form = CheckoutForm()
             context = {
                 'form': form,
@@ -92,12 +105,13 @@ class CheckoutView(LoginRequiredMixin, View):
             return render(self.request, "checkout.html", context)
         except ObjectDoesNotExist:
             messages.info(self.request, "You do not have an active order")
-            return redirect("core:order-summary")
-
+            return redirect("core:checkout")
+# work on post function please
     def post(self, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
         try:
-            order = Order.objects.get(user=self.request.user, ordered=False)
+            orders = Order.objects.filter(user=self.request.user, ordered=False)
+            order = orders.first()
             if form.is_valid():
 
                 use_default_shipping = form.cleaned_data.get(
@@ -214,19 +228,19 @@ class CheckoutView(LoginRequiredMixin, View):
                         messages.info(
                             self.request, "Please fill in the required billing address fields")
 
-                payment_option = form.cleaned_data.get('payment_option')
+                return redirect('core:payment', payment_option='stripe')
 
-                if payment_option == 'S':
-                    return redirect('core:payment', payment_option='stripe')
-                elif payment_option == 'P':
-                    return redirect('core:payment', payment_option='paypal')
-                else:
-                    messages.warning(
-                        self.request, "Invalid payment option selected")
-                    return redirect('core:checkout')
+                # if payment_option == 'S':
+                #     return redirect('core:payment', payment_option='stripe')
+                # elif payment_option == 'P':
+                #     return redirect('core:payment', payment_option='paypal')
+                # else:
+                #     messages.warning(
+                #         self.request, "Invalid payment option selected")
+                #     return redirect('core:checkout')
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
-            return redirect("core:order-summary")
+            return redirect("core:order-summary")        
 
 
 class PaymentView(View):
@@ -290,14 +304,14 @@ class PaymentView(View):
                     # charge the customer because we cannot charge the token more than once
                     charge = stripe.Charge.create(
                         amount=amount,  # cents
-                        currency="usd",
+                        currency="hkd",
                         customer=userprofile.stripe_customer_id
                     )
                 else:
                     # charge once off on the token
                     charge = stripe.Charge.create(
                         amount=amount,  # cents
-                        currency="usd",
+                        currency="hkd",
                         source=token
                     )
 

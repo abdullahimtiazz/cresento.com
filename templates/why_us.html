@@ -1,11 +1,30 @@
 {% extends "base.html"%}
 
 {% block content %}
-    <h1>Why Us</h1>
-    <p>These are the reasons why you should choose us.</p>
-{% endblock %}
 
-{% block extra_body %}
+<style>
+    .banner {
+      background-size: cover;
+      background-position: center;
+      background-color: #333;
+      height: 230px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .banner h1 {
+      font-size: 50px;
+      color: white;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  </style>
+
+    <div class="banner">        
+    <h1>Why Us?</h1>
+    </div>
+    <p>These are the reasons why you should choose us.</p>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -19,6 +38,21 @@
         </div>
     </div>
 {% endblock %}
+
+{% comment %} {% block extra_body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Reason 1</h2>
+                <p>Reason 1 description.</p>
+            </div>
+            <div class="col-md-6">
+                <h2>Reason 2</h2>
+                <p>Reason 2 description.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %} {% endcomment %}
 
 {% block extra_scripts %}
     <script>

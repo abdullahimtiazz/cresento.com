@@ -1,35 +1,5 @@
 {% extends "base.html" %}
 
-{% block extra_head%}
-{% comment %} <style>
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    width: 20px;
-    height: 20px;
-    background-size: 20px 20px;
-  }
-
-  .carousel-control-prev,
-  .carousel-control-next {
-    width: 120px;
-    height: 40px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .carousel-control-prev {
-    left: 10px;
-  }
-
-  .carousel-control-next {
-    right: 10px;
-  }
-</style> {% endcomment %}
-{% endblock%}
-
-
 {% block content %}
 <style>
   .carousel-control-prev-icon,
@@ -86,7 +56,6 @@
     <span class="visually-hidden"></span>
   </button>
 </div>
-{% comment %} <hr> {% endcomment %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -99,7 +68,7 @@
             margin: auto;
             overflow: hidden;
         }
-        .header {
+        .productarea {
             text-align: center;
             background-color: #D9D9D9;
             color: black;
@@ -164,17 +133,110 @@
 </head>
 <body>
 
-<div class="header">
-    <h1 >Popular</h1>
-    <h2>Champion MK I</h2>
-    <img src="/media/cresento-shin-pad.jpeg"/> <!-- Placeholder for image: THIS IS HARDCODED CHANGE -->
-    <div class="popular">
-        <button class="button">Add to Shopping Cart</button>
-        <button class="button">Explore more products</button>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #eaeaea; /* Light grey background */
+    margin: 0;
+    padding: 0;
+}
+
+.productarea {
+    text-align: left; /* Align text to the left */
+    padding: 10px 50px;
+    background-color: #eaeaea; /* Light grey background */
+}
+
+.productdesc {
+    background-color: pink; /* White background for the product area */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    padding: 20px;
+    max-width: 1200px; /* Set a max width */
+    margin: 20px auto; /* Center the product area */
+    text-align: left; /* Center the text */
+} 
+
+.product-image {
+    width: 100%; /* Make the image responsive */
+    max-width: 300px; /* Set a max width */
+    border-radius: 10px; /* Rounded corners for the image */
+}
+
+h1 {
+    font-size: 30px; /* Adjust font size */
+    margin: 0; /* Remove margin */
+    color: #333; /* Dark text */
+    padding: 10px 50px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 24px; /* Adjust font size */
+    margin: 10px 0; /* Spacing around */
+    color: #555; /* Darker grey */
+    font-weight: bold;
+}
+
+.tagline {
+    font-weight: bold; /* Bold tagline */
+    margin: 10px 0; /* Spacing around tagline */
+    color: #000; /* Black text */
+    justify-content: left; 
+}
+
+.description {
+    color: #666; /* Dark grey text for description */
+    line-height: 1.5; /* Increase line height for readability */
+    margin-bottom: 20px; /* Space below description */
+}
+
+.popular {
+    display: flex; /* Use flexbox for buttons */
+    justify-content: left; /* Space out buttons */
+}
+
+.button {
+    background-color: #000000; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 50px; /* Rounded button corners */
+    padding: 10px 15px; /* Button padding */
+    cursor: pointer; /* Pointer on hover */
+    flex: 1; /* Allow buttons to grow equally */
+    margin: 5px; /* Add margin between buttons */
+    transition: background-color 0.3s; /* Smooth background transition */
+    max-width: 150px; /* Set a max width */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+</style>
+
+
+<div>
+  <h1>Top-Selling Product</h1>
+  <div class="productdesc">
+  <div class="row">
+    <div class= "col-md-6">
+        <h2>Champion MK I</h2>
+        <img src="media/product_images/cresento-shin-pad.jpeg" alt="Champion MK I" class="product-image">
+        <div class="popular">
+          <a class="button" href="/add-to-cart/champion-mk-1">Add to Shopping Cart</a>
+          <a class="button" href="/all-products">Explore all products</a>
+        </div>
     </div>
-    <p>Some Tagline Over Here</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis</p>
+    <div class="col-md-6">
+      <h1 class="tagline">Some Tagline Over Here</h1>
+
+      <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis</p>
+      </div>
+    </div>
+  </div>
 </div>
+
+<hr>
 
 <div class="reviews">
     <h2>Reviews</h2>

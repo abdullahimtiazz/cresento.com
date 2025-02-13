@@ -1,42 +1,108 @@
-<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-    <hr class="my-4">
+footer {
+  background-color: #f4f4f4; /* Light grey background */
+  padding: 20px 0;
+}
 
-    <!-- Social icons -->
-    <div class="pb-4">
-      <a href="https://www.facebook.com/" target="_blank">
-        <i class="fab fa-facebook-f mr-3"></i>
-      </a>
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
-      <a href="https://twitter.com/MDBootstrap" target="_blank">
-        <i class="fab fa-twitter mr-3"></i>
-      </a>
+.footer-logo {
+  flex: 1;
+}
 
-      <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
-        <i class="fab fa-youtube mr-3"></i>
-      </a>
+.footer-logo h1 {
+  margin: 0;
+  font-size: 25px;
+  font-weight: bold;
+  color: #333
+}
 
-      <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
-        <i class="fab fa-google-plus-g mr-3"></i>
-      </a>
+.footer-links {
+  flex: 1;
+}
 
-      <a href="https://dribbble.com/mdbootstrap" target="_blank">
-        <i class="fab fa-dribbble mr-3"></i>
-      </a>
+.footer-links h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: bold;
+}
 
-      <a href="https://pinterest.com/mdbootstrap" target="_blank">
-        <i class="fab fa-pinterest mr-3"></i>
-      </a>
+.footer-links ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
-        <i class="fab fa-github mr-3"></i>
-      </a>
+.footer-links li {
+  margin-bottom: 10px;
+}
 
-      <a href="http://codepen.io/mdbootstrap/" target="_blank">
-        <i class="fab fa-codepen mr-3"></i>
-      </a>
-    </div>
-    <!-- Social icons -->
+.footer-links a {
+  text-decoration: none;
+  color: #333; /* Dark grey text */
+}
 
+.footer-links a:hover {
+  text-decoration: underline;
+  color: #666; /* Light grey text */
+}
 
+.footer-social {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-social a {
+  margin: 0 10px;
+}
+
+.footer-social img {
+  width: 24px; /* Adjust icon size */
+  height: 24px;
+}
+</style>
+
+<footer class="page-footer text-left font-small mt-4 wow fadeIn">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <h1>Cresento</h1>
+                    <p>Get better, the smart way.</p>
+                    <div class="footer-social align-items-left">
+                      <a href="https://www.facebook.com"> <i class="fab fa-facebook-f mr-3"></i></a>
+                      <a href="https://www.instagram.com"><i class= "fab fa-instagram mr-3"></i></a>
+                      <a href="https://www.youtube.com"><i class="fab fa-youtube mr-3"></i></a>
+                      <a href="https://www.linkedin.com"><i class= "fab fa-linkedin mr-3"></i></a>
+                  </div>
+                </div>
+              
+                <div class="footer-links">
+                    <h2>Information</h2>
+                    <ul>
+                        <li><a href="/policies/terms-of-service/">Terms of Service</a></li>
+                        <li><a href="/policies/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="">Returns & Refunds</a></li>
+                        <li><a href="">Shipping & Delivery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h2>Useful Links</h2>
+                    <ul>
+                        <li><a href="/why-us">Why us?</a></li>
+                        <li><a href="/check-your-stats">Check your Stats</a></li>
+                        <li><a href="/about-us">About Crescento</a></li>
+                    </ul>
+                </div>
+            </div>
   </footer>

@@ -24,7 +24,6 @@ Frontend Tasks:
 4- Fill in the static pages.
 
 Backend Tasks:
-1- Login
+1- Deal with discounted pricing systems
 2- Allow for credit card payments at checkout. 
-    
 3- Integrate with Firebase (optional).

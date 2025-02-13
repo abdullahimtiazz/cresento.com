@@ -1,6 +1,28 @@
 {% extends "base.html"%}
 
 {% block content %}
-    <h1>About Cresento</h1>
+<style>
+    .banner {
+      background-size: cover;
+      background-position: center;
+      background-color: #333;
+      height: 230px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .banner h1 {
+      font-size: 50px;
+      color: white;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  </style>
+
+    <div class="banner">        
+        <h1>About Cresento</h1>
+    </div>
+
     <p>Cresento is a company that sells products online.</p>
 {% endblock %}
